@@ -1,0 +1,3 @@
+DI vs. DIP vs. IoC : http://sergeyteplyakov.blogspot.com/2014/11/di-vs-dip-vs-ioc.html
+Документация Spring IoC : https://docs.spring.io/spring-framework/docs/current/reference/html/core.html
+Знакомство с Maven // Бесплатный урок OTUS : https://www.youtube.com/watch?v=Sm6QooVMt6k
