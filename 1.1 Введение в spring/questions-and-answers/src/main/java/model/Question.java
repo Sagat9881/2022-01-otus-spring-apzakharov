@@ -1,14 +1,28 @@
 package model;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
 
-@Setter
-@Getter
+@Data
 @Builder
 public class Question {
 
     private final QuestionType type;
-    private final String quest;
+    private final String questionBody;
+    private final Long weight;
+    private final String rightAnswer;
+
+
     private Boolean isAnsweredRight;
 
+    public void setAnswer(String answer) {
+        switch (type) {
+            case CLOSE:
+                isAnsweredRight = answer.trim().equalsIgnoreCase(rightAnswer);
+                break;
+            case OPEN:
+                isAnsweredRight = true;
+        }
+
+    }
 }
