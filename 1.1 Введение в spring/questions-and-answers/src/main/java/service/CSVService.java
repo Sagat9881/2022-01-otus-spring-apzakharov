@@ -18,11 +18,12 @@ public class CSVService {
         this.resourceURI = resourceURI;
     }
 
-    public List<Question> readCSVToQuestion() {
+    public List<Question> readCSVToQuestion() throws FileNotFoundException {
+
+        if (!Objects.nonNull(resourceURI)) {
+            throw new FileNotFoundException("Не указан путь к списку вопросов");
+        }
         try {
-            if (!Objects.nonNull(resourceURI)) {
-                throw new FileNotFoundException("Не указан путь к списку вопросов");
-            }
             ClassPathResource resource = new ClassPathResource(resourceURI);
             InputStream csvStream = resource.getInputStream();
 
@@ -40,9 +41,8 @@ public class CSVService {
                         .build();
 
             }).collect(Collectors.toList());
-
-        } catch (IOException exception) {
-            System.out.println(exception.getMessage());
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
 
         return null;

@@ -16,14 +16,14 @@ public class ConsoleView {
         this.service = service;
     }
 
-    public void startTestProcess() {
+    public void startTestProcess() throws Exception {
         System.out.println("Добро пожаловать в программу тестирования!");
 
         startTest();
         endTest();
     }
 
-    private void startTest() {
+    private void startTest() throws Exception {
 
         if (!Objects.nonNull(user)) {
             System.out.println("Пользователь не зарегестрирован в программе тестирования! " +
@@ -36,7 +36,7 @@ public class ConsoleView {
         service.getActiveQuestion().forEach(this::ask);
     }
 
-    private void endTest() {
+    private void endTest() throws Exception{
         user.setScore(service.calculateScore());
 
         boolean isSuccess = user.getScore() >= service.getMinScoreSuccess();

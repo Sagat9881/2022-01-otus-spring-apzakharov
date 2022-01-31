@@ -9,7 +9,7 @@ import view.ConsoleView;
 @Configuration
 public class App {
 
-    public static void main(String[] args) {
+    public static void main(String[] args)throws Exception {
         ApplicationContext context = new AnnotationConfigApplicationContext(ServiceConfig.class);
 
         ConsoleView view = context.getBean(ConsoleView.class);

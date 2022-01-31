@@ -24,7 +24,7 @@ public class AskService {
 //        this.csvReader = csvReader;
 //    }
 
-    public List<Question> getActiveQuestion() {
+    public List<Question> getActiveQuestion() throws Exception {
         if (!Objects.nonNull(questionList)) {
             questionList = csvReader.readCSVToQuestion();
         }
