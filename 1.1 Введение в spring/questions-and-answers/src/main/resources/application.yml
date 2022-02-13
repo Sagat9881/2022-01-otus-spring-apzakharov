@@ -1,8 +1,0 @@
-registrationForm: someRegisterForm
-testingForm: someTestForm
-closeForm: someCloseForm
-minSuccessScore: 10
-resourceURI: /questions.csv
-
-spring.messages.basename: i18n/messages
-spring.messages.encoding: UTF-8
