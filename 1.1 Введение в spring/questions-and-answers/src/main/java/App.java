@@ -1,14 +1,19 @@
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import service.AskService;
+import config.ServiceConfig;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import view.ConsoleView;
 
+@ComponentScan()
+@Configuration
 public class App {
+
     public static void main(String[] args) {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("/spring-context.xml");
-        AskService service = context.getBean(AskService.class);
+        ApplicationContext context = new AnnotationConfigApplicationContext(ServiceConfig.class);
 
-        service.ask();
+        ConsoleView view = context.getBean(ConsoleView.class);
+
+        view.startTestProcess();
     }
-
-
-
 }

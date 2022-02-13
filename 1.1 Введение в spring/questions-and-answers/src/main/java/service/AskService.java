@@ -1,61 +1,59 @@
 package service;
 
-import lombok.RequiredArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 import model.Question;
-import model.QuestionType;
-import org.springframework.core.io.ClassPathResource;
+import model.User;
 
-import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-@RequiredArgsConstructor
+@Builder
+@Getter
 public class AskService {
-    private final String resourceURI;
+
+    private final UserInputHandler inputHandler;
+    private final Long minScoreSuccess;
+    private final CSVService csvReader;
     private List<Question> questionList;
 
-    public List<Question> readCSV() {
-        try {
-            if (!Objects.nonNull(resourceURI)) {
-                throw new FileNotFoundException("Не указан путь к списку вопросов");
-            }
-            ClassPathResource resource = new ClassPathResource(resourceURI);
-            InputStream csvStream = resource.getInputStream();
+//    public AskService(UserInputHandler inputHandler, Long minScoreSuccess, CSVService csvReader) {
+//        this.inputHandler = inputHandler;
+//        this.minScoreSuccess = minScoreSuccess;
+//        this.csvReader = csvReader;
+//    }
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(csvStream));
-
-            return reader.lines().map(questLine -> {
-                String[] questAsArr = questLine.split(",");
-
-                return Question.builder()
-                        .type(QuestionType.valueOf(questAsArr[0]))
-                        .quest(questAsArr[1])
-                        .isAnsweredRight(false)
-                        .build();
-
-            }).collect(Collectors.toList());
-
-        } catch (IOException exception) {
-            System.out.println(exception.getMessage());
-        }
-
-        return null;
-    }
-
-    public void ask() {
+    public List<Question> getActiveQuestion() {
         if (!Objects.nonNull(questionList)) {
-            try {
-                questionList = readCSV();
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
+            questionList = csvReader.readCSVToQuestion();
         }
-        questionList.stream()
+        return questionList.stream()
                 .filter(question -> !question.getIsAnsweredRight())
-                .map(Question::getQuest)
-                .forEach(System.out::println);
+                .collect(Collectors.toList());
     }
+
+    public String handleInput() {
+        return inputHandler.handleInput();
+    }
+
+    public void handleAnswer(Question question) {
+        inputHandler.handleAnswer(question);
+    }
+
+    public Long calculateScore() {
+        return questionList.stream()
+                .filter(Question::getIsAnsweredRight)
+                .mapToLong(Question::getWeight)
+                .sum();
+    }
+
+    public User createNewUser(String name) {
+        return User.builder()
+                .name(name)
+                .score(0L)
+                .build();
+    }
+
+
 }
