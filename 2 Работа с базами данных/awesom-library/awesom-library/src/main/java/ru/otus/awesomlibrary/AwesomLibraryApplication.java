@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AwesomLibraryApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AwesomLibraryApplication.class, args);
+		SpringApplication.run(AwesomLibraryApplication.class);
 	}
 
 }
