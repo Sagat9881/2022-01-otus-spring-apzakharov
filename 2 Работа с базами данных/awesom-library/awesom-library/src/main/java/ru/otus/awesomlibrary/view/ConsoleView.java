@@ -20,7 +20,7 @@ public class ConsoleView {
     private final LibraryService libraryService;
     private final static String BOOK_SEPARATOR = "======================";
 
-    @ShellMethod(key = "create-book", value = "Add a new book to the library", prefix = "")
+    @ShellMethod(key = "create-book", value = "Add a new book to the library. If the \"f\" == true key, then the author and genre will be created forcibly", prefix = "")
     public void createBook(String title, String authorFullName, String genre, @ShellOption(defaultValue = "false") boolean f) {
 
         libraryService.createBook(title, authorFullName, genre, f);
