@@ -16,7 +16,7 @@ public class QuestionsAndAnswersApplication {
 
 
 	public static void main(String[] args) throws Exception {
-		 SpringApplication.run(QuestionsAndAnswersApplication.class);
+		 SpringApplication.run(QuestionsAndAnswersApplication.class);;
 
 	}
 

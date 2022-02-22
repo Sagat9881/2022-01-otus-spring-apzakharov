@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class UserInputHandler {
 
-    private final Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);;
 
     public String handleInput() {
         return scanner.hasNextLine() ? scanner.nextLine() : null;

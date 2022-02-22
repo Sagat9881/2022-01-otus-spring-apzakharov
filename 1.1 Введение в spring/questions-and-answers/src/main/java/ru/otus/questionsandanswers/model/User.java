@@ -10,7 +10,7 @@ import lombok.*;
 public class User {
 
     private String name;
-    private Long score;
+    private Long score;;
 
 
 }

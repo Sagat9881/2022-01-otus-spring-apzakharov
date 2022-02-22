@@ -10,7 +10,7 @@ public class Question {
     private final QuestionType type;
     private final String questionBody;
     private final Long weight;
-    private final String rightAnswer;
+    private final String rightAnswer;;
 
 
     private Boolean isAnsweredRight;

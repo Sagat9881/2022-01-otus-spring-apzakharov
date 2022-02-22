@@ -17,7 +17,7 @@ import static ru.otus.questionsandanswers.config.ServiceConfig.getAvalibaleLocal
 
 public class CSVService {
 
-    private final String resourceURI;
+    private final String resourceURI;;
 
     public CSVService(String resourceURI) {
         this.resourceURI = resourceURI;

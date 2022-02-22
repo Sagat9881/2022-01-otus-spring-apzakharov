@@ -25,7 +25,7 @@ class CSVServiceTest {
     void readCSVToQuestion() throws FileNotFoundException {
         String nullValidResourceURI = null;
         String exeptionMessage = "expected FileNotFondExepction";
-        CSVService csvService = getCsvServiceForTest(nullValidResourceURI);
+        CSVService csvService = getCsvServiceForTest(nullValidResourceURI);;
 
         assertThrows(FileNotFoundException.class,
                 csvService::readCSVToQuestion,exeptionMessage);

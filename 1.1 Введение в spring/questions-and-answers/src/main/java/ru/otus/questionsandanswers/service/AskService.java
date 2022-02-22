@@ -17,7 +17,7 @@ public class AskService {
     private final UserInputHandler inputHandler;
     private final Long minScoreSuccess;
     private final CSVService csvReader;
-    private List<Question> questionList;
+    private List<Question> questionList;;
 
 //    public AskService(UserInputHandler inputHandler, Long minScoreSuccess, CSVService csvReader) {
 //        this.inputHandler = inputHandler;

@@ -19,7 +19,7 @@ public class ServiceConfig {
 
     //    @Value("resourceURI")
 //    String resourceURI;
-    private static Locale locale;
+    private static Locale locale;;
 
     @Bean
     public CSVService csvService(@Value("${resourceURI}") String resourceURI) {

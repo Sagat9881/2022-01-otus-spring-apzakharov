@@ -25,11 +25,11 @@ class AskServiceTest {
 
     private final UserInputHandler inputHandler = mock(UserInputHandler.class);
 
-    private final CSVService csvReader = mock(CSVService.class);
+    private final CSVService csvReader = mock(CSVService.class);;
 
     @BeforeEach
     void setUp() throws Exception {
-        List<Question> list = getListQuestionTest();
+        List<Question> list = getListQuestionTest();;
         Question question = getTestQuestion();
 
         given(csvReader.readCSVToQuestion()).willReturn(list);

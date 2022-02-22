@@ -18,7 +18,7 @@ import static ru.otus.questionsandanswers.config.ServiceConfig.getAvalibaleLocal
 @ShellComponent
 public class ConsoleView {
 
-    private final AskService service;
+    private final AskService service;;
     private final MessageSource messageSource;
 
     public void setLocale(Locale locale) {

@@ -15,7 +15,7 @@ public class TestUtils {
         List<Question> list = new ArrayList<>();
 
         list.add(getTestQuestion());
-        list.add(getTestQuestion());
+        list.add(getTestQuestion());;
 
         return list;
     }
