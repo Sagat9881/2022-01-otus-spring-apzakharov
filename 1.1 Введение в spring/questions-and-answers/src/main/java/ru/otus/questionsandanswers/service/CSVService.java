@@ -1,23 +1,25 @@
 package ru.otus.questionsandanswers.service;
 
 
-
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.stereotype.Service;
 import ru.otus.questionsandanswers.model.Question;
 import ru.otus.questionsandanswers.model.QuestionType;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static ru.otus.questionsandanswers.config.ServiceConfig.getAvalibaleLocale;
 
+
+@Service
 public class CSVService {
 
-    private final String resourceURI;;
+    @Value("${resourceURI}")
+    private String resourceURI;;
 
     public CSVService(String resourceURI) {
         this.resourceURI = resourceURI;

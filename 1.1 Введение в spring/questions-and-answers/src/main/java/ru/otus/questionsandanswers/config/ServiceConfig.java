@@ -21,24 +21,24 @@ public class ServiceConfig {
 //    String resourceURI;
     private static Locale locale;;
 
-    @Bean
-    public CSVService csvService(@Value("${resourceURI}") String resourceURI) {
-        return new CSVService(resourceURI);
-    }
-
-    @Bean
-    public UserInputHandler userInputHandler() {
-        return new UserInputHandler();
-    }
-
-    @Bean
-    public AskService askService(CSVService csvReader, UserInputHandler inputHandler, @Value("${minSuccessScore}") Long minScoreSuccess) {
-        return AskService.builder()
-                .csvReader(csvReader)
-                .inputHandler(inputHandler)
-                .minScoreSuccess(minScoreSuccess)
-                .build();
-    }
+//    @Bean
+//    public CSVService csvService(@Value("${resourceURI}") String resourceURI) {
+//        return new CSVService(resourceURI);
+//    }
+//
+//    @Bean
+//    public UserInputHandler userInputHandler() {
+//        return new UserInputHandler();
+//    }
+//
+//    @Bean
+//    public AskService askService(CSVService csvReader, UserInputHandler inputHandler, @Value("${minSuccessScore}") Long minScoreSuccess) {
+//        return AskService.builder()
+//                .csvReader(csvReader)
+//                .inputHandler(inputHandler)
+//                .minScoreSuccess(minScoreSuccess)
+//                .build();
+//    }
 
 //    @Bean
 //    public ConsoleView consoleView(AskService askService, MessageSource messageSource) {

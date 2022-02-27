@@ -5,6 +5,7 @@ import org.springframework.context.MessageSource;
 
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
+import org.springframework.stereotype.Component;
 import ru.otus.questionsandanswers.model.Question;
 import ru.otus.questionsandanswers.model.User;
 import ru.otus.questionsandanswers.service.AskService;
@@ -15,7 +16,7 @@ import java.util.Objects;
 
 import static ru.otus.questionsandanswers.config.ServiceConfig.getAvalibaleLocale;
 
-@ShellComponent
+@Component
 public class ConsoleView {
 
     private final AskService service;;

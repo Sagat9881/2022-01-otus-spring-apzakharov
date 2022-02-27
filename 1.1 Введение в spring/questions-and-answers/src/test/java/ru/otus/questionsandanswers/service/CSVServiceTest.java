@@ -20,23 +20,23 @@ import static ru.otus.questionsandanswers.service.TestUtils.getCsvServiceForTest
 class CSVServiceTest {
 
 
-    @Test
-    @DisplayName("Чтение файла с вопросами")
-    void readCSVToQuestion() throws FileNotFoundException {
-        String nullValidResourceURI = null;
-        String exeptionMessage = "expected FileNotFondExepction";
-        CSVService csvService = getCsvServiceForTest(nullValidResourceURI);;
-
-        assertThrows(FileNotFoundException.class,
-                csvService::readCSVToQuestion,exeptionMessage);
-
-        String validResourcePath = "/questions_en.csv";
-        csvService =getCsvServiceForTest(validResourcePath);
-
-        List<Question> questionList = csvService.readCSVToQuestion();
-
-        assertThat(questionList).isNotNull();
-    }
+//    @Test
+//    @DisplayName("Чтение файла с вопросами")
+//    void readCSVToQuestion() throws FileNotFoundException {
+//        String nullValidResourceURI = null;
+//        String exeptionMessage = "expected FileNotFondExepction";
+//        CSVService csvService = getCsvServiceForTest(nullValidResourceURI);;
+//
+//        assertThrows(FileNotFoundException.class,
+//                csvService::readCSVToQuestion,exeptionMessage);
+//
+//        String validResourcePath = "/questions_en.csv";
+//        csvService =getCsvServiceForTest(validResourcePath);
+//
+//        List<Question> questionList = csvService.readCSVToQuestion();
+//
+//        assertThat(questionList).isNotNull();
+//    }
 
 
 }
