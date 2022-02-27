@@ -9,9 +9,11 @@ import ru.otus.questionsandanswers.model.Question;
 
 import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.Locale;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static ru.otus.questionsandanswers.config.LocaleConfig.setLocale;
 import static ru.otus.questionsandanswers.service.TestUtils.getCsvServiceForTest;
 
 
@@ -20,23 +22,29 @@ import static ru.otus.questionsandanswers.service.TestUtils.getCsvServiceForTest
 class CSVServiceTest {
 
 
-//    @Test
-//    @DisplayName("Чтение файла с вопросами")
-//    void readCSVToQuestion() throws FileNotFoundException {
-//        String nullValidResourceURI = null;
-//        String exeptionMessage = "expected FileNotFondExepction";
-//        CSVService csvService = getCsvServiceForTest(nullValidResourceURI);;
-//
-//        assertThrows(FileNotFoundException.class,
-//                csvService::readCSVToQuestion,exeptionMessage);
-//
-//        String validResourcePath = "/questions_en.csv";
-//        csvService =getCsvServiceForTest(validResourcePath);
-//
-//        List<Question> questionList = csvService.readCSVToQuestion();
-//
-//        assertThat(questionList).isNotNull();
-//    }
+    @Test
+    @DisplayName("Чтение файла с вопросами")
+    void readCSVToQuestion() throws FileNotFoundException {
+        String nullValidResourceURI = null;
+        String exeptionMessage = "expected FileNotFondExepction";
+        CSVService csvService = getCsvServiceForTest(nullValidResourceURI);
+
+        assertThrows(FileNotFoundException.class,
+                csvService::readCSVToQuestion,exeptionMessage);
+
+        String validDefaultLocaleResourcePath = "/questions.csv";
+        csvService =getCsvServiceForTest(validDefaultLocaleResourcePath);
+
+        List<Question> questionList = csvService.readCSVToQuestion();
+
+        assertThat(questionList).isNotNull();
+
+        setLocale(Locale.ENGLISH);
+
+        List<Question> anotherQuestionList = csvService.readCSVToQuestion();
+
+        assertThat(anotherQuestionList).isNotNull();
+    }
 
 
 }

@@ -14,9 +14,9 @@ import ru.otus.questionsandanswers.service.AskService;
 import java.util.Locale;
 import java.util.Objects;
 
-import static ru.otus.questionsandanswers.config.ServiceConfig.getAvalibaleLocale;
+import static ru.otus.questionsandanswers.config.LocaleConfig.getAvalibaleLocale;
 
-@Component
+@ShellComponent
 public class ConsoleView {
 
     private final AskService service;;
@@ -26,7 +26,7 @@ public class ConsoleView {
         this.locale = locale;
     }
 
-    private Locale locale = getAvalibaleLocale();
+    private Locale locale ;
     private User user;
 
     public ConsoleView(AskService service, MessageSource messageSource) {
@@ -35,6 +35,7 @@ public class ConsoleView {
     }
     @ShellMethod(key = "start-test",value="Start test")
     public void startTestProcess() throws Exception {
+        locale = getAvalibaleLocale();
 
         System.out.println( messageSource.getMessage("console.string.start",null,locale));
 

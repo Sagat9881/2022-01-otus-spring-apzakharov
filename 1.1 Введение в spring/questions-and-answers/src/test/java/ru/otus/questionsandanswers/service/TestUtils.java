@@ -31,11 +31,7 @@ public class TestUtils {
     }
 
     public static AskService getAskServiceForTest(CSVService csvService, UserInputHandler inputHandler){
-        return AskService.builder()
-                                    .csvReader(csvService)
-                                    .inputHandler(inputHandler)
-                                    .minScoreSuccess(10L)
-                                    .build();
+        return  new AskService(inputHandler,10L,csvService);
     }
 
     public static CSVService getCsvServiceForTest(String resourceURI){

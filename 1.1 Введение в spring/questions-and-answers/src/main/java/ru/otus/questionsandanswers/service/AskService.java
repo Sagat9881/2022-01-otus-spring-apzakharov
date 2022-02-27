@@ -3,7 +3,6 @@ package ru.otus.questionsandanswers.service;
 import lombok.Builder;
 import lombok.Getter;
 
-import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.otus.questionsandanswers.model.Question;
@@ -13,17 +12,21 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-@Builder
 @Getter
 @Service
 public class AskService {
 
     private final UserInputHandler inputHandler;
     private final CSVService csvReader;
-    private List<Question> questionList;;
-
-    @Value("${minSuccessScore}")
     private final Long minScoreSuccess;
+
+    private List<Question> questionList;
+
+    public AskService(UserInputHandler inputHandler,@Value("${minSuccessScore}") Long minScoreSuccess, CSVService csvReader) {
+        this.inputHandler = inputHandler;
+        this.minScoreSuccess = minScoreSuccess;
+        this.csvReader = csvReader;
+    }
 
     public List<Question> getActiveQuestion() throws Exception {
         if (!Objects.nonNull(questionList)) {
@@ -42,10 +45,9 @@ public class AskService {
         inputHandler.handleAnswer(question);
     }
 
-    @SneakyThrows
     public Long calculateScore() {
         if(!Objects.nonNull(questionList)){
-            questionList = csvReader.readCSVToQuestion();
+            return 0L;
         }
 
         return questionList.stream()

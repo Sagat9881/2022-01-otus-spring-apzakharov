@@ -1,0 +1,11 @@
+minSuccessScore: 10
+resourceURI: /questions.csv
+
+spring:
+  messages:
+    basename: i18n/messages
+    encoding: UTF-8
+
+
+  main:
+    allow-circular-references: true

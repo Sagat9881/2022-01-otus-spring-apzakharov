@@ -12,16 +12,16 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static ru.otus.questionsandanswers.config.ServiceConfig.getAvalibaleLocale;
+import static ru.otus.questionsandanswers.config.LocaleConfig.getAvalibaleLocale;
 
 
 @Service
 public class CSVService {
 
-    @Value("${resourceURI}")
-    private String resourceURI;;
 
-    public CSVService(String resourceURI) {
+    private final String resourceURI;;
+
+    public CSVService(@Value("${resourceURI}")String resourceURI) {
         this.resourceURI = resourceURI;
     }
 
