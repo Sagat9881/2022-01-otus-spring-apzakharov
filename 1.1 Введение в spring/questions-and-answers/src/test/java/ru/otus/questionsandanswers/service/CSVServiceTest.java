@@ -13,8 +13,7 @@ import java.util.Locale;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static ru.otus.questionsandanswers.config.ServiceConfig.getAvalibaleLocale;
-import static ru.otus.questionsandanswers.config.ServiceConfig.setLocale;
+import static ru.otus.questionsandanswers.config.LocaleConfig.setLocale;
 import static ru.otus.questionsandanswers.service.TestUtils.getCsvServiceForTest;
 
 

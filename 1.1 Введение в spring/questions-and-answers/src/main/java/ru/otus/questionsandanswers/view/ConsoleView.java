@@ -10,7 +10,7 @@ import ru.otus.questionsandanswers.service.AskService;
 import java.util.Locale;
 import java.util.Objects;
 
-import static ru.otus.questionsandanswers.config.ServiceConfig.getAvalibaleLocale;
+import static ru.otus.questionsandanswers.config.LocaleConfig.getAvalibaleLocale;
 
 @Component
 public class ConsoleView {

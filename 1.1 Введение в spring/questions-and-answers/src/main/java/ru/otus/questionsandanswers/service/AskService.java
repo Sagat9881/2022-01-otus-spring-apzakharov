@@ -46,6 +46,10 @@ public class AskService {
     }
 
     public Long calculateScore() {
+        if(!Objects.nonNull(questionList)){
+            return 0L;
+        }
+
         return questionList.stream()
                 .filter(Question::getIsAnsweredRight)
                 .mapToLong(Question::getWeight)
