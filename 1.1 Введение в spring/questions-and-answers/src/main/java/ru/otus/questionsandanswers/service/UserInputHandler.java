@@ -1,13 +1,15 @@
-package service;
+package ru.otus.questionsandanswers.service;
 
-import model.Question;
+
+import org.springframework.stereotype.Service;
+import ru.otus.questionsandanswers.model.Question;
 
 import java.util.Scanner;
 
-
+@Service
 public class UserInputHandler {
 
-    private final Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);;
 
     public String handleInput() {
         return scanner.hasNextLine() ? scanner.nextLine() : null;
