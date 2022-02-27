@@ -1,19 +1,21 @@
-package service;
+package ru.otus.questionsandanswers.service;
 
-import model.Question;
-import model.QuestionType;
+
+import lombok.experimental.UtilityClass;
+import ru.otus.questionsandanswers.model.Question;
+import ru.otus.questionsandanswers.model.QuestionType;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+@UtilityClass
 public class TestUtils {
 
     public static List<Question> getListQuestionTest(){
         List<Question> list = new ArrayList<>();
 
         list.add(getTestQuestion());
-        list.add(getTestQuestion());
+        list.add(getTestQuestion());;
 
         return list;
     }
@@ -29,11 +31,7 @@ public class TestUtils {
     }
 
     public static AskService getAskServiceForTest(CSVService csvService, UserInputHandler inputHandler){
-        return AskService.builder()
-                                    .csvReader(csvService)
-                                    .inputHandler(inputHandler)
-                                    .minScoreSuccess(10L)
-                                    .build();
+        return  new AskService(inputHandler,10L,csvService);
     }
 
     public static CSVService getCsvServiceForTest(String resourceURI){

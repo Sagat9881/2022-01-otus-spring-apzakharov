@@ -1,20 +1,27 @@
-package service;
+package ru.otus.questionsandanswers.service;
 
-import model.Question;
-import model.QuestionType;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.stereotype.Service;
+import ru.otus.questionsandanswers.model.Question;
+import ru.otus.questionsandanswers.model.QuestionType;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import static ru.otus.questionsandanswers.config.LocaleConfig.getAvalibaleLocale;
+
+
+@Service
 public class CSVService {
 
-    private final String resourceURI;
 
-    public CSVService(String resourceURI) {
+    private final String resourceURI;;
+
+    public CSVService(@Value("${resourceURI}")String resourceURI) {
         this.resourceURI = resourceURI;
     }
 
@@ -24,6 +31,8 @@ public class CSVService {
             throw new FileNotFoundException("Не указан путь к списку вопросов");
         }
         try {
+            String resourceURI = this.resourceURI.replace(".csv","_"+getAvalibaleLocale().getLanguage()+".csv");
+
             ClassPathResource resource = new ClassPathResource(resourceURI);
             InputStream csvStream = resource.getInputStream();
 

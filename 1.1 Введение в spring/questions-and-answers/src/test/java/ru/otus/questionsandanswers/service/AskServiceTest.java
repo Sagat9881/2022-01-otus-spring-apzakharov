@@ -1,12 +1,13 @@
-package service;
+package ru.otus.questionsandanswers.service;
 
-import model.Question;
-import model.User;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
+import ru.otus.questionsandanswers.model.Question;
+import ru.otus.questionsandanswers.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,8 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
-import static service.TestUtils.*;
+import static ru.otus.questionsandanswers.service.TestUtils.*;
+
 
 @DisplayName("Сервис оперирования вопросами")
 @ExtendWith(MockitoExtension.class)
@@ -23,11 +25,11 @@ class AskServiceTest {
 
     private final UserInputHandler inputHandler = mock(UserInputHandler.class);
 
-    private final CSVService csvReader = mock(CSVService.class);
+    private final CSVService csvReader = mock(CSVService.class);;
 
     @BeforeEach
     void setUp() throws Exception {
-        List<Question> list = getListQuestionTest();
+        List<Question> list = getListQuestionTest();;
         Question question = getTestQuestion();
 
         given(csvReader.readCSVToQuestion()).willReturn(list);

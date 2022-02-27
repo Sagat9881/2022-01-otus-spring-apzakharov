@@ -1,28 +1,32 @@
-package service;
+package ru.otus.questionsandanswers.service;
 
 import lombok.Builder;
 import lombok.Getter;
-import model.Question;
-import model.User;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import ru.otus.questionsandanswers.model.Question;
+import ru.otus.questionsandanswers.model.User;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-@Builder
 @Getter
+@Service
 public class AskService {
 
     private final UserInputHandler inputHandler;
-    private final Long minScoreSuccess;
     private final CSVService csvReader;
+    private final Long minScoreSuccess;
+
     private List<Question> questionList;
 
-//    public AskService(UserInputHandler inputHandler, Long minScoreSuccess, CSVService csvReader) {
-//        this.inputHandler = inputHandler;
-//        this.minScoreSuccess = minScoreSuccess;
-//        this.csvReader = csvReader;
-//    }
+    public AskService(UserInputHandler inputHandler,@Value("${minSuccessScore}") Long minScoreSuccess, CSVService csvReader) {
+        this.inputHandler = inputHandler;
+        this.minScoreSuccess = minScoreSuccess;
+        this.csvReader = csvReader;
+    }
 
     public List<Question> getActiveQuestion() throws Exception {
         if (!Objects.nonNull(questionList)) {
@@ -42,6 +46,10 @@ public class AskService {
     }
 
     public Long calculateScore() {
+        if(!Objects.nonNull(questionList)){
+            return 0L;
+        }
+
         return questionList.stream()
                 .filter(Question::getIsAnsweredRight)
                 .mapToLong(Question::getWeight)
