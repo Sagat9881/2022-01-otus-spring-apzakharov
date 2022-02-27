@@ -18,11 +18,7 @@ public class ConsoleView {
     private final AskService service;;
     private final MessageSource messageSource;
 
-    public void setLocale(Locale locale) {
-        this.locale = locale;
-    }
-
-    private Locale locale = getAvalibaleLocale();
+    private Locale locale ;
     private User user;
 
     public ConsoleView(AskService service, MessageSource messageSource) {
@@ -31,6 +27,7 @@ public class ConsoleView {
     }
 
     public void startTestProcess() throws Exception {
+        locale = getAvalibaleLocale();
 
         System.out.println( messageSource.getMessage("console.string.start",null,locale));
 
