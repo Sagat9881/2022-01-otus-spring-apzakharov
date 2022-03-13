@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface AuthorDao {
 
-    void createAuthor(Author author);
+    Author createAuthor(Author author);
     Author getAuthorById(Long id);
     List<Author> getAllAuthor();
     void deleteAuthorById(Long id);

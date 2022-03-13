@@ -24,29 +24,41 @@ public class BookDaoJdbc implements BookDao {
 
     @Override
     public void createBook(Book book) {
+
         jdbc.getJdbcOperations()
-                .update("insert into books (title, author, bookGenre) values (?, ?, ?)", book.getTitle(), book.getAuthor().getFullName(), book.getBookGenre().getGenreType());
+                .update("insert into books (book_id, title, author, book_genre) values (?, ?, ?, ?)",book.getBook_id(), book.getTitle(), book.getAuthor().getAuthor_id(), book.getBookGenre().getBook_genre_id());
     }
 
     @Override
     public Book getBookById(Long id) {
-        return jdbc.getJdbcOperations().queryForObject("select * from books where id = ?", new BookMapper(), id);
+        return jdbc.getJdbcOperations().queryForObject("select * from books where book_id = ?", new BookMapper(), id);
     }
 
     @Override
     public List<Book> getAllBook() {
-        return jdbc.query("select * from books", new BookMapper());
+        return jdbc.query("select books.book_id,books.title, " +
+                        "book_authors.full_name, book_authors.author_id," +
+                        "book_genres.genre_type, book_genres.genre_id " +
+                        "from books " +
+                        "inner join book_authors on book_authors.author_id = books.author "+
+                        "inner join book_genres on book_genres.genre_id = books.book_genre ", new BookMapper());
     }
 
     @Override
     public void deleteBookById(Long id) {
-        jdbc.getJdbcOperations().update("delete from books where id = ?", id);
+        jdbc.getJdbcOperations().update("delete from books where book_id = ?", id);
     }
 
     @Override
     public Book getByTitle(String title) {
         Map<String, Object> paramMap = Map.of("title", title);
-        return jdbc.queryForObject("select * from books where title = :title ", paramMap, new BookMapper());
+        return jdbc.queryForObject("select books.book_id,books.title, " +
+                "book_authors.full_name, book_authors.author_id," +
+                "book_genres.genre_type, book_genres.genre_id " +
+                "from books " +
+                "inner join book_authors on book_authors.author_id = books.author "+
+                "inner join book_genres on book_genres.genre_id = books.book_genre "+
+                "where title = :title ", paramMap, new BookMapper());
     }
 
     @Override
@@ -60,8 +72,15 @@ public class BookDaoJdbc implements BookDao {
         @Override
         public Book mapRow(ResultSet rs, int rowNum) throws SQLException {
             return Book.builder()
-                    .bookGenre(BookGenre.builder().genreType(rs.getString("bookGenre")).build())
-                    .author(Author.builder().fullName(rs.getString("author")).build())
+                    .book_id(rs.getLong("book_id"))
+                    .bookGenre(BookGenre.builder()
+                            .book_genre_id(rs.getLong("genre_id"))
+                            .genreType(rs.getString("genre_type"))
+                            .build())
+                    .author(Author.builder()
+                            .author_id(rs.getLong("author_id"))
+                            .fullName(rs.getString("full_name"))
+                            .build())
                     .title(rs.getString("title"))
                     .build();
         }

@@ -14,12 +14,13 @@ import java.util.List;
 public class AuthorService {
     private final AuthorDao dao;
 
-    public void createAuthor(Author author) {
+    public Author createAuthor(Author author) {
         try {
-            dao.createAuthor(author);
+          return  dao.createAuthor(author);
         } catch (DataAccessException ex) {
             System.out.println("Не удалось создать автора");
         }
+        return null;
     }
 
     public Author getAuthorById(Long id) {

@@ -10,6 +10,7 @@ import ru.otus.awesomlibrary.exepction.AuthorNotFoundException;
 import ru.otus.awesomlibrary.exepction.GenreNotFoundException;
 
 import java.util.List;
+import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
@@ -19,30 +20,32 @@ public class LibraryService {
     private final BookGenreService genreService;
 
     public void createBook(String title, String authorFullName, String kindGenre, boolean force) {
-
+        Author author = null;
+        BookGenre bookGenre = null;
         try {
-            Author author = authorService.getForFullName(authorFullName);
+             author = authorService.getForFullName(authorFullName);
 
         } catch (AuthorNotFoundException e) {
             if (force) {
                 System.out.println("Новый автор будет добавлен");
-                authorService.createAuthor(Author.builder().fullName(authorFullName).build());
+                author= authorService.createAuthor(Author.builder().fullName(authorFullName).build());
             }
         }
 
         try {
-            BookGenre bookGenre = genreService.getForGenreType(kindGenre);
+             bookGenre = genreService.getForGenreType(kindGenre);
         } catch (GenreNotFoundException e) {
             if (force) {
                 System.out.println("Новый жанр будет добавлен");
-                genreService.createGenre(BookGenre.builder().genreType(kindGenre).build());
+                bookGenre = genreService.createGenre(BookGenre.builder().genreType(kindGenre).build());
             }
         }
+        int id = (int) (Math.random() * 10);
 
-        bookService.createBook(Book.builder()
+        bookService.createBook(Book.builder().book_id((long) id)
                 .title(title)
-                .author(Author.builder().fullName(authorFullName).build())
-                .bookGenre(BookGenre.builder().genreType(kindGenre).build())
+                .author(author)
+                .bookGenre(bookGenre)
                 .build());
 
     }

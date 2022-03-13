@@ -8,5 +8,6 @@ import lombok.ToString;
 @Builder
 @ToString
 public class BookGenre {
+    private Long book_genre_id;
     private String genreType;
 }

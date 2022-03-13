@@ -14,12 +14,13 @@ import java.util.List;
 public class BookGenreService {
     private final BookGenreDao dao;
 
-    public void createGenre(BookGenre genre) {
+    public BookGenre createGenre(BookGenre genre) {
         try {
-            dao.createBookGenre(genre);
+           return dao.createBookGenre(genre);
         } catch (DataAccessException e) {
             System.out.println("Не удалось создать жанр");
         }
+        return null;
     }
 
     public BookGenre getGenreById(Long id) {

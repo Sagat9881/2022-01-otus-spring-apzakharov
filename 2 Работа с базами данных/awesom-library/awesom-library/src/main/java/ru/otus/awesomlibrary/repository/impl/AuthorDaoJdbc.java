@@ -18,13 +18,16 @@ public class AuthorDaoJdbc implements AuthorDao {
     private final NamedParameterJdbcTemplate jdbc;
 
     @Override
-    public void createAuthor(Author author) {
-        jdbc.getJdbcOperations().update("insert into book_authors (fullName) values (?)", author.getFullName());
+    public Author createAuthor(Author author) {
+        int id = (int) (Math.random() * 10);
+        author.setAuthor_id((long)id);
+        jdbc.getJdbcOperations().update("insert into book_authors (author_id, full_name) values (?,?)",author.getAuthor_id(), author.getFullName());
+        return author;
     }
 
     @Override
     public Author getAuthorById(Long id) {
-        return jdbc.getJdbcOperations().queryForObject("select * from book_authors where id = ?", new AuthorMapper(),id);
+        return jdbc.getJdbcOperations().queryForObject("select * from book_authors where author_id = ?", new AuthorMapper(),id);
     }
 
     @Override
@@ -34,19 +37,20 @@ public class AuthorDaoJdbc implements AuthorDao {
 
     @Override
     public void deleteAuthorById(Long id) {
-        jdbc.getJdbcOperations().update("delete from book_authors where id=?",id);
+        jdbc.getJdbcOperations().update("delete from book_authors where author_id = ?",id);
     }
 
     @Override
     public Author getByFullName(String authorFullName) {
-        return jdbc.getJdbcOperations().queryForObject("select * from book_authors where fullName=?", new AuthorMapper(),authorFullName);
+        return jdbc.getJdbcOperations().queryForObject("select * from book_authors where full_name = ?", new AuthorMapper(),authorFullName);
     }
 
     private static class AuthorMapper implements RowMapper<Author>{
         @Override
         public Author mapRow(ResultSet rs, int rowNum) throws SQLException {
             return Author.builder()
-                            .fullName(rs.getString("fullName"))
+                            .author_id(rs.getLong("author_id"))
+                            .fullName(rs.getString("full_name"))
                             .build();
         }
     }

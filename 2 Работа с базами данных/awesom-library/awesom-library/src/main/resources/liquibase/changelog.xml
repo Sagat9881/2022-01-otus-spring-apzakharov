@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <property name="autoIncrement" value="false" dbms="mssql,oracle"/>
+    <property name="autoIncrement" value="true" dbms="postgresql,h2"/>
+
+    <changeSet id="1" author="apzakhrov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="book_authors"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="book_authors">
+            <column name="author_id" type="BIGINT" autoIncrement="false">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="full_name" type="VARCHAR(255)" autoIncrement="false">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="apzakhrov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="book_genre"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="book_genres">
+            <column name="genre_id" type="BIGINT" autoIncrement="false">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="genre_type" type="VARCHAR(255)" autoIncrement="false">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="3" author="apzakhrov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="books"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="books">
+            <column name="book_id" type="BIGINT" autoIncrement="false">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(255)" autoIncrement="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="author" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="book_genre" type="BIGINT"/>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="author"
+                                 baseTableName="books"
+                                 constraintName="fk_author_books_id"
+                                 referencedColumnNames="author_id"
+                                 referencedTableName="book_authors"/>
+
+        <addForeignKeyConstraint baseColumnNames="book_genre"
+                                 baseTableName="books"
+                                 constraintName="fk_bookGenre_books_id"
+                                 referencedColumnNames="genre_id"
+                                 referencedTableName="book_genres"/>
+    </changeSet>
+
+    <changeSet id="4" author="apzakhrov">
+
+        <insert tableName="book_authors" >
+            <column name="author_id" value="1"/>
+            <column name="full_name" value="Me"/>
+        </insert>
+
+        <insert tableName="book_genres">
+            <column name="genre_id" value="1"/>
+            <column name="genre_type" value="MyGenre"/>
+        </insert>
+
+        <insert tableName="books">
+            <column name="book_id" value="1"/>
+            <column name="title" value="MyBook"/>
+            <column name="author" value="1"/>
+            <column name="book_genre" value="1"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -18,20 +20,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @JdbcTest
+@PropertySource(value = "application.yml")
+@Import(BookDaoJdbc.class)
 @ExtendWith(SpringExtension.class)
 class BookDaoJdbcTest {
 
-    public static final String TEST_TYPE = "MyGenre";
-    public static final BookGenre TEST_BOOK_GENRE = BookGenre.builder().genreType(TEST_TYPE).build();
-    public static final String TEST_FULLNAME = "Me";
-    public static final Author TEST_AUTHOR = Author.builder().fullName(TEST_FULLNAME).build();
-    public static final String TEST_TITLE = "TEST_TITLE";
+    private static final String TEST_TYPE = "MyGenre";
+    private static final BookGenre TEST_BOOK_GENRE = BookGenre.builder().genreType(TEST_TYPE).build();
+    private static final String TEST_FULLNAME = "Me";
+    private static final Author TEST_AUTHOR = Author.builder().fullName(TEST_FULLNAME).build();
+    private static final String TEST_TITLE = "TEST_TITLE";
+
     @Autowired
-    private NamedParameterJdbcTemplate jdbc;
+    private BookDao dao;
 
     @Test
     void createBook() {
-        BookDao dao = new BookDaoJdbc(jdbc);
+
         Book testCreatedBook = Book.builder()
                 .bookGenre(TEST_BOOK_GENRE)
                 .author(TEST_AUTHOR)
@@ -46,7 +51,7 @@ class BookDaoJdbcTest {
 
     @Test
     void getAllBook() {
-        BookDao dao = new BookDaoJdbc(jdbc);
+
         Book testCreatedBook = Book.builder()
                 .bookGenre(TEST_BOOK_GENRE)
                 .author(TEST_AUTHOR)
@@ -63,7 +68,7 @@ class BookDaoJdbcTest {
 
     @Test
     void getByTitle() {
-        BookDao dao = new BookDaoJdbc(jdbc);
+
         Book testCreatedBook = Book.builder()
                 .bookGenre(TEST_BOOK_GENRE)
                 .author(TEST_AUTHOR)
@@ -78,7 +83,7 @@ class BookDaoJdbcTest {
 
     @Test
     void deleteBookByTitle() {
-        BookDao dao = new BookDaoJdbc(jdbc);
+
         Book testCreatedBook = Book.builder()
                 .bookGenre(TEST_BOOK_GENRE)
                 .author(TEST_AUTHOR)

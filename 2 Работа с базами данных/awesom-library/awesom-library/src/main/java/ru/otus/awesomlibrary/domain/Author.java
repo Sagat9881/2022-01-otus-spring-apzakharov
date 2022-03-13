@@ -8,5 +8,6 @@ import lombok.ToString;
 @Builder
 @ToString
 public class Author {
+    private Long author_id;
     private String fullName;
 }

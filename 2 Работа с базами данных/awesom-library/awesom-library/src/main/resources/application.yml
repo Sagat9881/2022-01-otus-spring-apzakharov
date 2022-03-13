@@ -1,0 +1,19 @@
+spring:
+  main:
+    allow-circular-references: true
+  h2:
+    console:
+        enabled: true
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+    initialization-mode: always
+
+# ===============================
+# LIQUIBASE
+# ===============================
+  liquibase:
+    enabled: true
+    change-log: "liquibase/changelog.xml"
