@@ -16,7 +16,9 @@ public class BookGenreService {
 
     public BookGenre createGenre(BookGenre genre) {
         try {
-           return dao.createBookGenre(genre);
+            int id = (int) (Math.random() * 10);
+            genre.setBook_genre_id((long) id);
+            return dao.createBookGenre(genre);
         } catch (DataAccessException e) {
             System.out.println("Не удалось создать жанр");
         }

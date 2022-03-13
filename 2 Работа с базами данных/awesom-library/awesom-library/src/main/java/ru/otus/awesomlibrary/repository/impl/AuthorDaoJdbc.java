@@ -19,8 +19,7 @@ public class AuthorDaoJdbc implements AuthorDao {
 
     @Override
     public Author createAuthor(Author author) {
-        int id = (int) (Math.random() * 10);
-        author.setAuthor_id((long)id);
+
         jdbc.getJdbcOperations().update("insert into book_authors (author_id, full_name) values (?,?)",author.getAuthor_id(), author.getFullName());
         return author;
     }

@@ -65,13 +65,17 @@
                                  baseTableName="books"
                                  constraintName="fk_author_books_id"
                                  referencedColumnNames="author_id"
-                                 referencedTableName="book_authors"/>
+                                 referencedTableName="book_authors"
+                                 onUpdate="CASCADE"/>
+
 
         <addForeignKeyConstraint baseColumnNames="book_genre"
                                  baseTableName="books"
                                  constraintName="fk_bookGenre_books_id"
                                  referencedColumnNames="genre_id"
-                                 referencedTableName="book_genres"/>
+                                 referencedTableName="book_genres"
+                                 onUpdate="CASCADE"/>
+
     </changeSet>
 
     <changeSet id="4" author="apzakhrov">

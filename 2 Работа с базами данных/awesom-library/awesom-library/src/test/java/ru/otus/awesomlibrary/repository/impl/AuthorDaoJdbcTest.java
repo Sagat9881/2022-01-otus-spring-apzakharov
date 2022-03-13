@@ -1,6 +1,7 @@
 package ru.otus.awesomlibrary.repository.impl;
 
 import liquibase.pro.packaged.S;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 class AuthorDaoJdbcTest {
 
     public static final String TEST_NAME = "TEST_NAME";
-    public static final Author TEST_AUTHOR = Author.builder().fullName(TEST_NAME).build();
+    private static final Long TEST_ID = 2L;
+    public static Author TEST_AUTHOR ;
     @Autowired
     private NamedParameterJdbcTemplate jdbc;
+
+    @BeforeAll
+    static void init() {
+        TEST_AUTHOR = Author.builder().author_id(TEST_ID).fullName(TEST_NAME).build();
+    }
 
     @Test
     void createAuthor() {

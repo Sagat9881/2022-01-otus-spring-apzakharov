@@ -22,8 +22,7 @@ public class BookGenreDaoJdbc implements BookGenreDao {
 
     @Override
     public BookGenre createBookGenre(BookGenre genre) {
-        int id = (int) (Math.random() * 10);
-        genre.setBook_genre_id((long) id);
+
         jdbc.getJdbcOperations().update("insert into book_genres (genre_id, genre_type) values (?,?)", genre.getBook_genre_id(), genre.getGenreType());
         return genre;
     }

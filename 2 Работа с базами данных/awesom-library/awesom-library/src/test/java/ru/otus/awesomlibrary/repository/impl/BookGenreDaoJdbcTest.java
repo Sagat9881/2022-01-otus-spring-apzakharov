@@ -1,5 +1,6 @@
 package ru.otus.awesomlibrary.repository.impl;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +23,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 class BookGenreDaoJdbcTest {
 
     public static final String TEST_TYPE = "TEST_TYPE";
-    public static final BookGenre TEST_BOOK_GENRE = BookGenre.builder().genreType(TEST_TYPE).build();
+    private static final Long TEST_ID = 2L;
+    public static  BookGenre TEST_BOOK_GENRE ;
 
     @Autowired
     private NamedParameterJdbcTemplate jdbc;
+
+    @BeforeAll
+    static void init(){
+        TEST_BOOK_GENRE = BookGenre.builder().book_genre_id(TEST_ID).genreType(TEST_TYPE).build();
+    }
 
     @Test
     void createBookGenre() {
