@@ -2,7 +2,9 @@ package ru.otus.awesomlibrary.repository.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 import ru.otus.awesomlibrary.domain.Author;
 import ru.otus.awesomlibrary.domain.Book;
@@ -19,8 +21,14 @@ public class AuthorDaoJdbc implements AuthorDao {
 
     @Override
     public Author createAuthor(Author author) {
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("full_name",author.getFullName());
+        GeneratedKeyHolder key = new GeneratedKeyHolder();
 
-        jdbc.getJdbcOperations().update("insert into book_authors (author_id, full_name) values (?,?)",author.getAuthor_id(), author.getFullName());
+        jdbc.update("insert into book_authors (full_name) values (:full_name)",params,key);
+
+        author.setAuthor_id((Long)key.getKey());
+
         return author;
     }
 

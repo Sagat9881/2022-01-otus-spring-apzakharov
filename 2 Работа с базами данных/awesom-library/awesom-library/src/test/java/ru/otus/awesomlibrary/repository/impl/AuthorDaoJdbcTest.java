@@ -21,14 +21,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 class AuthorDaoJdbcTest {
 
     public static final String TEST_NAME = "TEST_NAME";
-    private static final Long TEST_ID = 2L;
     public static Author TEST_AUTHOR ;
     @Autowired
     private NamedParameterJdbcTemplate jdbc;
 
     @BeforeAll
     static void init() {
-        TEST_AUTHOR = Author.builder().author_id(TEST_ID).fullName(TEST_NAME).build();
+        TEST_AUTHOR = Author.builder().fullName(TEST_NAME).build();
     }
 
     @Test

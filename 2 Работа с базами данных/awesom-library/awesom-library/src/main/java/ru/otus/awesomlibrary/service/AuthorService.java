@@ -16,8 +16,6 @@ public class AuthorService {
 
     public Author createAuthor(Author author) {
         try {
-            int id = (int) (Math.random() * 10);
-            author.setAuthor_id((long) id);
             return dao.createAuthor(author);
         } catch (DataAccessException ex) {
             System.out.println("Не удалось создать автора");

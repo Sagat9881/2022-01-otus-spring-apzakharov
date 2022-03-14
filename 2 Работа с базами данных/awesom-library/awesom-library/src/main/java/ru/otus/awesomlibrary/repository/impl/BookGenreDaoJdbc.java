@@ -3,7 +3,9 @@ package ru.otus.awesomlibrary.repository.impl;
 import io.micrometer.core.instrument.MultiGauge;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 import ru.otus.awesomlibrary.domain.Book;
 import ru.otus.awesomlibrary.domain.BookGenre;
@@ -22,8 +24,14 @@ public class BookGenreDaoJdbc implements BookGenreDao {
 
     @Override
     public BookGenre createBookGenre(BookGenre genre) {
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("genre_type",genre.getGenreType());
 
-        jdbc.getJdbcOperations().update("insert into book_genres (genre_id, genre_type) values (?,?)", genre.getBook_genre_id(), genre.getGenreType());
+        GeneratedKeyHolder key = new GeneratedKeyHolder();
+
+        jdbc.update("insert into book_genres (genre_type) values (:genre_type)",params,key);
+        genre.setBook_genre_id((Long)key.getKey());
+
         return genre;
     }
 

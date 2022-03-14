@@ -23,7 +23,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 class BookGenreDaoJdbcTest {
 
     public static final String TEST_TYPE = "TEST_TYPE";
-    private static final Long TEST_ID = 2L;
     public static  BookGenre TEST_BOOK_GENRE ;
 
     @Autowired
@@ -31,7 +30,7 @@ class BookGenreDaoJdbcTest {
 
     @BeforeAll
     static void init(){
-        TEST_BOOK_GENRE = BookGenre.builder().book_genre_id(TEST_ID).genreType(TEST_TYPE).build();
+        TEST_BOOK_GENRE = BookGenre.builder().genreType(TEST_TYPE).build();
     }
 
     @Test

@@ -16,10 +16,10 @@
         </preConditions>
 
         <createTable tableName="book_authors">
-            <column name="author_id" type="BIGINT" autoIncrement="false">
+            <column name="author_id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="full_name" type="VARCHAR(255)" autoIncrement="false">
+            <column name="full_name" type="VARCHAR(255)" >
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -33,10 +33,10 @@
         </preConditions>
 
         <createTable tableName="book_genres">
-            <column name="genre_id" type="BIGINT" autoIncrement="false">
+            <column name="genre_id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="genre_type" type="VARCHAR(255)" autoIncrement="false">
+            <column name="genre_type" type="VARCHAR(255)" >
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -50,10 +50,10 @@
         </preConditions>
 
         <createTable tableName="books">
-            <column name="book_id" type="BIGINT" autoIncrement="false">
+            <column name="book_id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="title" type="VARCHAR(255)" autoIncrement="false">
+            <column name="title" type="VARCHAR(255)" >
                 <constraints nullable="false"/>
             </column>
             <column name="author" type="BIGINT">

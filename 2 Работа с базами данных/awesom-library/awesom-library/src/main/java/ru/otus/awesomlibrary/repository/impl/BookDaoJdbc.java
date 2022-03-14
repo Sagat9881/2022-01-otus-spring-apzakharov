@@ -4,7 +4,9 @@ import liquibase.pro.packaged.B;
 import liquibase.pro.packaged.O;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 import ru.otus.awesomlibrary.domain.Author;
 import ru.otus.awesomlibrary.domain.Book;
@@ -23,10 +25,19 @@ public class BookDaoJdbc implements BookDao {
     private final NamedParameterJdbcTemplate jdbc;
 
     @Override
-    public void createBook(Book book) {
+    public Book createBook(Book book) {
+        MapSqlParameterSource params = new MapSqlParameterSource();
 
-        jdbc.getJdbcOperations()
-                .update("insert into books (book_id, title, author, book_genre) values (?, ?, ?, ?)",book.getBook_id(), book.getTitle(), book.getAuthor().getAuthor_id(), book.getBookGenre().getBook_genre_id());
+        params.addValue("title",book.getTitle());
+        params.addValue("author",book.getAuthor().getAuthor_id());
+        params.addValue("book_genre",book.getBookGenre().getBook_genre_id());
+        GeneratedKeyHolder key = new GeneratedKeyHolder();
+
+        jdbc.update("insert into books ( title, author, book_genre) values (:title, :author,:book_genre)",params,key);
+
+         book.setBook_id((Long)key.getKey());
+
+         return book;
     }
 
     @Override

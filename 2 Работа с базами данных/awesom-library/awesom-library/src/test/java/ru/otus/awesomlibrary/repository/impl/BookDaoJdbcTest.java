@@ -46,7 +46,6 @@ class BookDaoJdbcTest {
     void createBook() {
 
         Book testCreatedBook = Book.builder()
-                .book_id((long) Math.random() * 100)
                 .bookGenre(TEST_BOOK_GENRE)
                 .author(TEST_AUTHOR)
                 .title(TEST_TITLE)
@@ -62,7 +61,6 @@ class BookDaoJdbcTest {
     void getAllBook() {
 
         Book testCreatedBook = Book.builder()
-                .book_id((long) Math.random() * 100)
                 .bookGenre(TEST_BOOK_GENRE)
                 .author(TEST_AUTHOR)
                 .title(TEST_TITLE)
@@ -80,7 +78,6 @@ class BookDaoJdbcTest {
     void getByTitle() {
 
         Book testCreatedBook = Book.builder()
-                .book_id((long) Math.random() * 100)
                 .bookGenre(TEST_BOOK_GENRE)
                 .author(TEST_AUTHOR)
                 .title(TEST_TITLE)
@@ -96,7 +93,6 @@ class BookDaoJdbcTest {
     void deleteBookByTitle() {
 
         Book testCreatedBook = Book.builder()
-                .book_id((long) Math.random() * 100)
                 .bookGenre(TEST_BOOK_GENRE)
                 .author(TEST_AUTHOR)
                 .title(TEST_TITLE)
