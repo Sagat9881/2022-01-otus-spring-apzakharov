@@ -33,6 +33,16 @@ public class AuthorService {
         return author;
     }
 
+    public Author getAuthorByName(String name) {
+        Author author = null;
+        try {
+            author = dao.getByFullName(name);
+        } catch (DataAccessException ex) {
+            System.out.println("Не удалось найти автора");
+        }
+        return author;
+    }
+
     public List<Author> getAllAuthor() {
         List<Author> authorList = null;
         try {
@@ -46,6 +56,14 @@ public class AuthorService {
     public void deleteAuthorById(Long id) {
         try {
             dao.deleteAuthorById(id);
+        } catch (DataAccessException ex) {
+            System.out.println("Не удалось удалить автора");
+        }
+    }
+
+    public void deleteAuthorByName(String name) {
+        try {
+            dao.deleteAuthorByName(name);
         } catch (DataAccessException ex) {
             System.out.println("Не удалось удалить автора");
         }

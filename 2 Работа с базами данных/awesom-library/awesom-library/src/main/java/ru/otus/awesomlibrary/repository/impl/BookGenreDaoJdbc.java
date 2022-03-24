@@ -51,6 +51,11 @@ public class BookGenreDaoJdbc implements BookGenreDao {
     }
 
     @Override
+    public void deleteBookGenreByType(String type) {
+        jdbc.getJdbcOperations().update("delete from book_genres where genre_type=?", type);
+    }
+
+    @Override
     public BookGenre getForKind(String genreType) {
         return jdbc.getJdbcOperations().queryForObject("select * from book_genres where genre_type = ?", new BookGenreMapper(), genreType);
     }

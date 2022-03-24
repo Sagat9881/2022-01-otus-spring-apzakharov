@@ -48,6 +48,11 @@ public class AuthorDaoJdbc implements AuthorDao {
     }
 
     @Override
+    public void deleteAuthorByName(String name) {
+        jdbc.getJdbcOperations().update("delete from book_authors where full_name = ?",name);
+    }
+
+    @Override
     public Author getByFullName(String authorFullName) {
         return jdbc.getJdbcOperations().queryForObject("select * from book_authors where full_name = ?", new AuthorMapper(),authorFullName);
     }

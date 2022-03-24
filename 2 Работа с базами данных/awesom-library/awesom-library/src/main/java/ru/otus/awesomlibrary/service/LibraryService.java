@@ -19,30 +19,28 @@ public class LibraryService {
     private final BookService bookService;
     private final BookGenreService genreService;
 
-    public void createBook(String title, String authorFullName, String kindGenre, boolean force) {
+    public void createBook(String title, String authorFullName, String kindGenre) {
         Author author = null;
         BookGenre bookGenre = null;
         try {
-             author = authorService.getForFullName(authorFullName);
+            author = authorService.getForFullName(authorFullName);
 
         } catch (AuthorNotFoundException e) {
-            if (force) {
-                System.out.println("Новый автор будет добавлен");
-                author= authorService.createAuthor(Author.builder().fullName(authorFullName).build());
-            }
+            System.out.println("Новый автор будет добавлен");
+            author = authorService.createAuthor(Author.builder().fullName(authorFullName).build());
+
         }
 
         try {
-             bookGenre = genreService.getForGenreType(kindGenre);
+            bookGenre = genreService.getForGenreType(kindGenre);
         } catch (GenreNotFoundException e) {
-            if (force) {
-                System.out.println("Новый жанр будет добавлен");
-                bookGenre = genreService.createGenre(BookGenre.builder().genreType(kindGenre).build());
-            }
-        }
-        int id = (int) (Math.random() * 10);
+            System.out.println("Новый жанр будет добавлен");
+            bookGenre = genreService.createGenre(BookGenre.builder().genreType(kindGenre).build());
 
-        bookService.createBook(Book.builder().book_id((long) id)
+        }
+
+
+        bookService.createBook(Book.builder()
                 .title(title)
                 .author(author)
                 .bookGenre(bookGenre)

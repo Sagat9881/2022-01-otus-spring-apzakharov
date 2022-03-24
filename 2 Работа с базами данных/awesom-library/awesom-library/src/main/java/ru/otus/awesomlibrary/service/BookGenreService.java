@@ -52,6 +52,14 @@ public class BookGenreService {
         }
     }
 
+    public void deleteGenreByType(String type) {
+        try {
+            dao.deleteBookGenreByType(type);
+        } catch (DataAccessException e) {
+            System.out.println("Не удалось удалить жанр");
+        }
+    }
+
 
     public BookGenre getForGenreType(String genreType) {
         BookGenre genre = null;

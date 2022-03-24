@@ -11,6 +11,6 @@ public interface BookGenreDao {
     BookGenre getBookGenreById(Long id);
     List<BookGenre> getAllBookGenre();
     void deleteBookGenreById(Long id);
-
+    void deleteBookGenreByType(String type);
     BookGenre getForKind(String genreType);
 }

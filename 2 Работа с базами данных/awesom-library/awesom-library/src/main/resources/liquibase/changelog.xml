@@ -8,7 +8,7 @@
     <property name="autoIncrement" value="false" dbms="mssql,oracle"/>
     <property name="autoIncrement" value="true" dbms="postgresql,h2"/>
 
-    <changeSet id="1" author="apzakhrov">
+    <changeSet id="25-03-2022-1" author="apzakhrov">
         <preConditions onFail="MARK_RAN">
             <not>
                 <tableExists tableName="book_authors"/>
@@ -25,7 +25,7 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="2" author="apzakhrov">
+    <changeSet id="25-03-2022-2" author="apzakhrov">
         <preConditions onFail="MARK_RAN">
             <not>
                 <tableExists tableName="book_genre"/>
@@ -42,7 +42,7 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="3" author="apzakhrov">
+    <changeSet id="25-03-2022-3" author="apzakhrov">
         <preConditions onFail="MARK_RAN">
             <not>
                 <tableExists tableName="books"/>
@@ -78,7 +78,7 @@
 
     </changeSet>
 
-    <changeSet id="4" author="apzakhrov">
+    <changeSet id="25-03-2022-4" author="apzakhrov">
 
         <insert tableName="book_authors" >
             <column name="author_id" value="1"/>
