@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <property name="autoIncrement" value="false" dbms="mssql,oracle"/>
+    <property name="autoIncrement" value="true" dbms="postgresql,h2"/>
+
+    <changeSet id="1.00.01" author="apzakhrov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="book_authors"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="book_authors">
+            <column name="author_id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="full_name" type="VARCHAR(255)" >
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

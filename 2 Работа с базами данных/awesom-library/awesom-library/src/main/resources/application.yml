@@ -16,4 +16,4 @@ spring:
 # ===============================
   liquibase:
     enabled: true
-    change-log: "liquibase/changelog.xml"
+    change-log: "liquibase/rootChangeLog.xml"

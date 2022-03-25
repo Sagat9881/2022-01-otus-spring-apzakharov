@@ -8,41 +8,7 @@
     <property name="autoIncrement" value="false" dbms="mssql,oracle"/>
     <property name="autoIncrement" value="true" dbms="postgresql,h2"/>
 
-    <changeSet id="25-03-2022-1" author="apzakhrov">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="book_authors"/>
-            </not>
-        </preConditions>
-
-        <createTable tableName="book_authors">
-            <column name="author_id" type="BIGINT" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="full_name" type="VARCHAR(255)" >
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-
-    <changeSet id="25-03-2022-2" author="apzakhrov">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="book_genre"/>
-            </not>
-        </preConditions>
-
-        <createTable tableName="book_genres">
-            <column name="genre_id" type="BIGINT" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="genre_type" type="VARCHAR(255)" >
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-
-    <changeSet id="25-03-2022-3" author="apzakhrov">
+    <changeSet id="1.00.03" author="apzakhrov">
         <preConditions onFail="MARK_RAN">
             <not>
                 <tableExists tableName="books"/>
@@ -76,26 +42,6 @@
                                  referencedTableName="book_genres"
                                  onUpdate="CASCADE"/>
 
-    </changeSet>
-
-    <changeSet id="25-03-2022-4" author="apzakhrov">
-
-        <insert tableName="book_authors" >
-            <column name="author_id" value="1"/>
-            <column name="full_name" value="Me"/>
-        </insert>
-
-        <insert tableName="book_genres">
-            <column name="genre_id" value="1"/>
-            <column name="genre_type" value="MyGenre"/>
-        </insert>
-
-        <insert tableName="books">
-            <column name="book_id" value="1"/>
-            <column name="title" value="MyBook"/>
-            <column name="author" value="1"/>
-            <column name="book_genre" value="1"/>
-        </insert>
     </changeSet>
 
 </databaseChangeLog>
