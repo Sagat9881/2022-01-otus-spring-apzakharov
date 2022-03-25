@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <property name="autoIncrement" value="false" dbms="mssql,oracle"/>
+    <property name="autoIncrement" value="true" dbms="postgresql,h2"/>
+
+    <changeSet id="1.00.04" author="apzakhrov">
+
+        <insert tableName="book_authors" >
+            <column name="author_id" value="1"/>
+            <column name="full_name" value="Me"/>
+        </insert>
+
+        <insert tableName="book_genres">
+            <column name="genre_id" value="1"/>
+            <column name="genre_type" value="MyGenre"/>
+        </insert>
+
+        <insert tableName="books">
+            <column name="book_id" value="1"/>
+            <column name="title" value="MyBook"/>
+            <column name="author" value="1"/>
+            <column name="book_genre" value="1"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
